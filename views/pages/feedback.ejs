@@ -1,0 +1,56 @@
+<head>
+    <title>Community Feedback</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <%- include('../includes/navbar') %>
+        <%- include("../includes/toast") %>
+            <main class="main-content">
+                <div class="feedback-card shadow p-4">
+                    <h2 class="text-center mb-4">Community Feedback 💬</h2>
+                    <form action="/feedback" method="post">
+                        <input class="form-control mb-3" name="name" placeholder="Your Name" required>
+                        <input class="form-control mb-3" name="email" placeholder="Email">
+                        <select class="form-control mb-3" id="roleSelect" name="role" required>
+                            <option value="">Select Role</option>
+                            <option value="Volunteer">Volunteer</option>
+                            <option value="SeniorCitizen">Senior Citizen</option>
+                            <option value="Donor">Donor</option>
+                        </select>
+                        <div id="volunteerFileds" class="role-section">
+                            <input class="form-control mb-3" name="interactionDetails"
+                                placeholder="Activities you did with...">
+                        </div>
+                        <!-- <div id="donorFields" class="role-section">
+                        <select class="form-control mb-3" name="donationType">
+                            <option value="">Donation Type</option>
+                            <option>Money</option>
+                            <option>Clothes</option>
+                            <option>Food</option>
+                            <option>Other</option>
+                        </select>
+                    </div> -->
+                        <label>Rate Your Experience</label>
+                        <select class="form-control mb-3" name="rating" required>
+                            <option value="">-- Select --</option>
+                            <option value="excellent">Excellent</option>
+                            <option value="good">Good</option>
+                            <option value="average">Average</option>
+                            <option value="poor">Poor</option>
+                        </select>
+                        <textarea class="form-control mb-3" name="experience" placeholder="Share your experience..."
+                            required></textarea>
+                        <select class="form-control mb-3" name="visitAgain">
+                            <option value="">Would you like to visit again?</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <button class="btn btn-success w-100">Submit FeedBack</button>
+                    </form>
+                </div>
+            </main>
+            <%- include('../includes/footer') %>
+                <script src="/js/feedback.js"></script>
+</body>

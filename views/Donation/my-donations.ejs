@@ -1,0 +1,85 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <%- include('../includes/navbar') %>
+        <div class="container mt-5 pt-5">
+            <h2 class="mb-4">My Donations</h2>
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card shadow text-center p-3">
+                        <h5>Total Donations</h5>
+                        <h3 class="text-success">
+                            <%= totalDonations %>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow text-center p-3">
+                        <h5>Money Donated</h5>
+                        <h3 class="text-success">₹<%= totalMoney %>
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow text-center p-3">
+                        <h5>Items Donated</h5>
+                        <h3 class="text-success">
+                            <%= itemsDonated %>
+                        </h3>
+                    </div>
+                </div>
+
+            </div>
+            <h4 class="mb-3">Donation History</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% donations.forEach(d=> { %>
+                        <tr>
+                            <td>
+                                <%= d.donationType %>
+                            </td>
+                            <td>
+                                <%= d.amount || "-" %>
+                            </td>
+                            <td>
+                                <%= d.description || "-" %>
+                            </td>
+                            <td>
+
+                            <span class="badge 
+                                <%= d.status === 'Completed' ? 'bg-success' : d.status === 'Pending' ? 'bg-warning' :'bg-secondary' %>">
+                                <%= d.status %>
+                            </span>
+                            </td>
+                            <td>
+                                <%= d.date.toDateString() %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+            <div class="card mt-5 shadow text-center p-4">
+                <h4 class="text-success">Your Impact 💚</h4>
+                <p>
+                    Because of your support, senior citizens receive food, care, and companionship.
+                </p>
+                <p class="fw-bold">
+                    Thank you for supporting the Humanhood mission!
+                </p>
+            </div>
+        </div>
+        <%- include('../includes/footer') %>
+</body>

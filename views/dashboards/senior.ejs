@@ -1,0 +1,137 @@
+<head>
+  <title>Senior Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <%- include('../includes/navbar') %>
+    <main>
+      <div class="senior-container senior-dashboard mt-4">
+        <div class="mb-4">
+          <h2 class="senior-welcome-text">Welcome <%= user.name %> 👋</h2>
+          <p class="text-muted">Here is your senior dashboard</p>
+          <hr>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card shadow senior-profile-card ">
+              <h4 class="mb-3">Senior Profile</h4>
+              <p><strong>Name:</strong>
+                <%= user.name %>
+              </p>
+              <p><strong>Email:</strong>
+                <%= user.email %>
+              </p>
+              <p><strong>Age:</strong>
+                <%= user.age || "-" %>
+              </p>
+              <p><strong>Location:</strong>
+                <%= user.location || "-" %>
+              </p>
+              <p><strong>Interests:</strong>
+                <%= user.interests || "-" %>
+              </p>
+            </div>
+          </div>
+
+          <!-- VISIT SUMMARY -->
+
+          <div class="col-md-8">
+            <div class="row g-3">
+
+              <div class="col-md-4">
+                <div class="card text-center senior-stats-card shadow">
+                  <div class="card-body">
+                    <h6>Total Visits</h6>
+                    <h3 class="text-success">
+                      <%= visits.length %>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card text-center senior-stats-card shadow">
+                  <div class="card-body">
+                    <h6>Pending</h6>
+                    <h3 class="text-warning">
+                      <%= visits.filter(v=>v.status==="Pending").length %>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card text-center senior-stats-card shadow">
+                  <div class="card-body">
+                    <h6>Completed</h6>
+                    <h3 class="text-primary">
+                      <%= visits.filter(v=>v.status==="Completed").length %>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- VISIT TABLE -->
+
+          <div class="card visit-card shadow mt-4 mb-4">
+            <h4 class="mb-3">Volunteer Visits</h4>
+            <table class="table table-hover senior-table">
+              <thead class="table-light">
+                <tr>
+                  <th>Volunteer</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Activity</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% if(visits.length===0){ %>
+                  <tr>
+                    <td colspan="5" class="text-center text-muted">
+                      No volunteer visits yet
+                    </td>
+                  </tr>
+                  <% } %>
+                    <% visits.forEach(v=>{ %>
+                      <tr>
+                        <td>
+                          <%= v.volunteerName %>
+                        </td>
+                        <td>
+                          <%= new Date(v.visitDate).toDateString() %>
+                        </td>
+                        <td>
+                          <%= v.visitTime || "-" %>
+                        </td>
+                        <td>
+                          <%= v.activity || "-" %>
+                        </td>
+                        <td>
+                          <% if(v.status==="Pending" ){ %>
+                            <span class="badge bg-warning">Pending</span>
+                            <% } %>
+
+                              <% if(v.status==="Accepted" ){ %>
+                                <span class="badge bg-success">Accepted</span>
+                                <% } %>
+
+                                  <% if(v.status==="Completed" ){ %>
+                                    <span class="badge bg-primary">Completed</span>
+                                    <% } %>
+                        </td>
+                      </tr>
+                      <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+    </main>
+    <%- include('../includes/footer') %>
+</body>
