@@ -16,6 +16,7 @@ const volunteerRoutes = require("./routes/volunteer");
 const ngoRoutes = require("./routes/ngo");
 const feedbackRoutes = require("./routes/feedback");
 const dashboardRoutes = require("./routes/dashboard");
+const homeRoutes = require("./routes/home");
 const {
     isLoggedIn,
     isVolunteer,
@@ -56,6 +57,7 @@ app.use(donationRoutes);
 app.use(volunteerRoutes);
 app.use(feedbackRoutes);
 app.use(ngoRoutes);
+app.use(homeRoutes);
 
 app.get("/", async (req, res) => {
     const volunteerCount = await User.countDocuments({ role: "volunteer" });
